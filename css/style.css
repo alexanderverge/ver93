@@ -1,0 +1,363 @@
+/* ver93 — landing page
+   Design tokens: "Vapor" palette (shared with the Contrail app). */
+
+:root {
+  --accent: #0b57d0;
+  --accent-dark: #083f96;
+  --ink: #111a22;
+  --ink-14: rgba(17, 26, 34, 0.14);
+  --ink-45: rgba(17, 26, 34, 0.45);
+  --ink-50: rgba(17, 26, 34, 0.5);
+  --ink-55: rgba(17, 26, 34, 0.55);
+  --ink-60: rgba(17, 26, 34, 0.6);
+  --hairline: rgba(17, 26, 34, 0.08);
+  --bg: #eef2f6;
+  --surface: rgba(255, 255, 255, 0.6);
+  --surface-soft: #eef3f7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Space Grotesk", system-ui, sans-serif;
+}
+
+::selection {
+  background: rgba(11, 87, 208, 0.18);
+  color: var(--ink);
+}
+
+a {
+  color: var(--accent);
+}
+
+a:hover {
+  color: var(--accent-dark);
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero {
+    animation: none;
+  }
+}
+
+/* ---------- layout shell ---------- */
+
+.page {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+#bg-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+.wrap {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* ---------- nav ---------- */
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 32px;
+}
+
+.nav__mark {
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.nav__est {
+  font-family: "DM Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--ink-50);
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  padding-top: 140px;
+  padding-bottom: 160px;
+  animation: fadeUp 0.9s ease both;
+}
+
+.hero h1 {
+  font-size: clamp(48px, 7vw, 90px);
+  line-height: 1.02;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 0 0 28px;
+  max-width: 920px;
+  text-wrap: pretty;
+}
+
+.hero p {
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.55;
+  color: var(--ink-60);
+  max-width: 600px;
+  margin: 0;
+}
+
+/* ---------- product sections ---------- */
+
+.product {
+  padding-bottom: 160px;
+}
+
+.product--mystery {
+  padding-bottom: 140px;
+}
+
+.eyebrow {
+  font-family: "DM Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--ink-45);
+  margin: 0 0 20px;
+}
+
+.card {
+  border: 1px solid var(--hairline);
+  border-radius: 28px;
+  background: var(--surface);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: clamp(28px, 4vw, 56px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: 40px;
+  align-items: center;
+}
+
+.icon-tile {
+  display: block;
+  border-radius: 16px;
+  box-shadow: 0 3px 12px rgba(17, 26, 34, 0.14);
+  margin-bottom: 28px;
+}
+
+.product-title {
+  font-size: clamp(32px, 4vw, 46px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 0 0 12px;
+}
+
+.product-tagline {
+  font-family: "DM Mono", monospace;
+  font-size: 14px;
+  color: var(--accent);
+  letter-spacing: 0.01em;
+  margin: 0 0 20px;
+}
+
+.product-desc {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-60);
+  max-width: 440px;
+  margin: 0 0 32px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--ink-14);
+  border-radius: 999px;
+  padding: 12px 20px;
+  color: var(--ink-55);
+  font-family: "DM Mono", monospace;
+  font-size: 13px;
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+
+.badge svg {
+  flex: none;
+  fill: var(--ink-55);
+}
+
+/* ---------- device frame (Contrail map screen) ---------- */
+
+.device-frame {
+  justify-self: center;
+  width: min(233px, 100%);
+  aspect-ratio: 233 / 507;
+  position: relative;
+  overflow: hidden;
+  border-radius: 32px;
+  box-shadow: 0 20px 60px rgba(17, 26, 34, 0.18), 0 0 0 1px rgba(17, 26, 34, 0.06);
+  background: #ffffff;
+}
+
+/* ---------- screenshot showcase (static, for now — see README) ---------- */
+
+.showcase {
+  justify-self: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.showcase__stage {
+  position: relative;
+  width: min(380px, 100%);
+  aspect-ratio: 1 / 1.28;
+  /* Deliberately not clipped: the shots and their shadows are allowed to
+     extend past this box (into the card's own padding) rather than being
+     cropped at a hard viewport edge. */
+  overflow: visible;
+  perspective: 1000px;
+}
+
+.showcase__shot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 58%;
+  /* Matches the source screenshots' own ratio exactly, so the full,
+     unmodified image is shown — no cropping, no padding, no mat. */
+  aspect-ratio: 1170 / 2532;
+  object-fit: cover;
+  display: block;
+  border-radius: 20px;
+  box-shadow: 0 16px 40px rgba(17, 26, 34, 0.25), 0 0 0 1px rgba(17, 26, 34, 0.08);
+}
+
+.showcase__shot.is-center {
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 3;
+}
+
+.showcase__shot.is-back-right {
+  transform: translate(-50%, -50%) translateX(65%) translateY(3%) scale(0.82) rotateY(-8deg);
+  z-index: 2;
+}
+
+.showcase__shot.is-back-left {
+  transform: translate(-50%, -50%) translateX(-62%) translateY(7%) scale(0.64) rotateY(10deg);
+  z-index: 1;
+}
+
+/* ---------- mystery product ---------- */
+
+.icon-placeholder {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  border: 1.5px dashed rgba(17, 26, 34, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+  font-family: "DM Mono", monospace;
+  font-size: 20px;
+  color: rgba(17, 26, 34, 0.3);
+}
+
+.hatch {
+  background-image: repeating-linear-gradient(
+    118deg,
+    rgba(17, 26, 34, 0.07) 0 7px,
+    rgba(17, 26, 34, 0.02) 7px 14px
+  );
+  background-color: var(--surface-soft);
+  border-radius: 8px;
+}
+
+.hatch--title {
+  width: min(230px, 100%);
+  height: 40px;
+  margin-bottom: 16px;
+}
+
+.hatch--sub {
+  width: 150px;
+  height: 16px;
+  border-radius: 6px;
+  margin-bottom: 24px;
+}
+
+.device-frame--ghost {
+  border: 1.5px dashed rgba(17, 26, 34, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "DM Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: rgba(17, 26, 34, 0.3);
+}
+
+/* ---------- closer / footer ---------- */
+
+.closer {
+  padding-bottom: 140px;
+  text-align: center;
+}
+
+.closer p {
+  font-family: "DM Mono", monospace;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: rgba(17, 26, 34, 0.4);
+  margin: 0;
+}
+
+.footer {
+  padding-top: 32px;
+  padding-bottom: 48px;
+  border-top: 1px solid var(--hairline);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-family: "DM Mono", monospace;
+  font-size: 12px;
+  color: var(--ink-45);
+}
