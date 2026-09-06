@@ -30,7 +30,10 @@
 
     <header class="nav wrap">
       <span class="nav__mark">ver93</span>
-      <span class="nav__est">EST. 2026</span>
+      <div class="nav__right">
+        <button class="nav__contact" type="button" id="contact-open">Contact</button>
+        <span class="nav__est">EST. 2026</span>
+      </div>
     </header>
 
     <section class="hero wrap">
@@ -100,6 +103,40 @@
   </div>
 </div>
 
+<dialog class="contact-dialog" id="contact-dialog" aria-labelledby="contact-dialog-title">
+  <div class="contact-dialog__inner">
+    <button class="contact-dialog__close" type="button" id="contact-close" aria-label="Close">
+      <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1L13 13M13 1L1 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+
+    <p class="eyebrow">GET IN TOUCH</p>
+    <h2 class="contact-dialog__title" id="contact-dialog-title">Let's talk.</h2>
+    <p class="contact-dialog__sub">Questions, feedback, or just want to say hi — drop a note below.</p>
+
+    <form id="contact-form" novalidate>
+      <label class="field">
+        <span class="field__label">Name</span>
+        <input type="text" name="name" autocomplete="name" required>
+      </label>
+      <label class="field">
+        <span class="field__label">Email</span>
+        <input type="email" name="email" autocomplete="email" required>
+      </label>
+      <label class="field">
+        <span class="field__label">Message</span>
+        <textarea name="message" rows="4" required></textarea>
+      </label>
+      <!-- Honeypot: real visitors never see or fill this in; bots often do. -->
+      <input type="checkbox" name="botcheck" class="field__honeypot" tabindex="-1" autocomplete="off">
+
+      <button class="contact-dialog__submit" type="submit" id="contact-submit">Send message</button>
+      <p class="contact-dialog__note">Sent straight to the ver93 inbox.</p>
+      <p class="contact-dialog__status" id="contact-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</dialog>
+
 <script src="js/main.js"></script>
+<script src="js/contact.js"></script>
 </body>
 </html>

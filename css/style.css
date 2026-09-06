@@ -108,11 +108,35 @@ a:hover {
   color: var(--ink);
 }
 
+.nav__right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 .nav__est {
   font-family: "DM Mono", monospace;
   font-size: 12px;
   letter-spacing: 0.1em;
   color: var(--ink-50);
+}
+
+.nav__contact {
+  font-family: "DM Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  background: none;
+  border: 1px solid var(--ink-14);
+  border-radius: 999px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.nav__contact:hover {
+  background: var(--surface-soft);
+  border-color: rgba(17, 26, 34, 0.24);
 }
 
 /* ---------- hero ---------- */
@@ -360,4 +384,202 @@ a:hover {
   font-family: "DM Mono", monospace;
   font-size: 12px;
   color: var(--ink-45);
+}
+
+/* ---------- contact dialog ---------- */
+
+.contact-dialog {
+  padding: 0;
+  border: none;
+  background: transparent;
+  max-width: min(480px, 92vw);
+  width: 100%;
+  overflow: visible;
+  color: var(--ink);
+}
+
+.contact-dialog::backdrop {
+  background: rgba(17, 26, 34, 0);
+  backdrop-filter: blur(0);
+  -webkit-backdrop-filter: blur(0);
+  transition: background 0.35s ease, backdrop-filter 0.35s ease;
+}
+
+.contact-dialog.is-open::backdrop {
+  background: rgba(17, 26, 34, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.contact-dialog__inner {
+  position: relative;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: clamp(28px, 5vw, 44px);
+  border-radius: 28px;
+  background: #fdfeff;
+  box-shadow: 0 30px 80px rgba(17, 26, 34, 0.3), 0 0 0 1px rgba(17, 26, 34, 0.06);
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  opacity: 0;
+  transform: scale(0.95) translateY(10px);
+  transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.contact-dialog.is-open .contact-dialog__inner {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-dialog__inner {
+    transition: opacity 0.15s ease;
+    transform: none;
+  }
+}
+
+.contact-dialog__close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid var(--hairline);
+  background: var(--surface-soft);
+  color: var(--ink-55);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.contact-dialog__close:hover {
+  background: #ffffff;
+  color: var(--ink);
+}
+
+.contact-dialog__title {
+  font-size: clamp(28px, 4vw, 34px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 4px 0 10px;
+  padding-right: 32px;
+}
+
+.contact-dialog__sub {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-60);
+  margin: 0 0 28px;
+}
+
+.field {
+  display: block;
+  margin-bottom: 18px;
+}
+
+.field__label {
+  display: block;
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-45);
+  margin-bottom: 8px;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-size: 15px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--hairline);
+  background: var(--surface-soft);
+  color: var(--ink);
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 90px;
+  font-family: inherit;
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(11, 87, 208, 0.14);
+}
+
+.contact-dialog__submit {
+  width: 100%;
+  padding: 14px 20px;
+  margin-top: 6px;
+  border: none;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #ffffff;
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.contact-dialog__submit:hover {
+  background: var(--accent-dark);
+}
+
+.contact-dialog__submit:active {
+  transform: scale(0.98);
+}
+
+.contact-dialog__submit:disabled {
+  opacity: 0.7;
+  cursor: default;
+  transform: none;
+}
+
+.contact-dialog__note {
+  margin: 14px 0 0;
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  color: var(--ink-45);
+  text-align: center;
+}
+
+.contact-dialog__note a {
+  color: var(--ink-45);
+}
+
+.field__honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.contact-dialog__status {
+  margin: 10px 0 0;
+  font-family: "DM Mono", monospace;
+  font-size: 12px;
+  text-align: center;
+  min-height: 1.4em;
+}
+
+.contact-dialog__status[data-state="success"] {
+  color: var(--accent);
+}
+
+.contact-dialog__status[data-state="error"] {
+  color: #b3261e;
 }
