@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contrail Support</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #111a22;
+    --sub: rgba(17,26,34,.55);
+    --surf: #f6f9fb;
+    --surf-soft: #eef3f7;
+    --line: rgba(17,26,34,.09);
+    --accent: #0b57d0;
+    --accent-soft: rgba(11,87,208,.1);
+    --on-accent: #ffffff;
+    --radius: 18px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0b1220;
+      --ink: #eef3fa;
+      --sub: rgba(238,243,250,.58);
+      --surf: #121c2e;
+      --surf-soft: rgba(238,243,250,.06);
+      --line: rgba(238,243,250,.12);
+      --accent: #6ea8f5;
+      --accent-soft: rgba(110,168,245,.14);
+      --on-accent: #0b1220;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0b1220;
+    --ink: #eef3fa;
+    --sub: rgba(238,243,250,.58);
+    --surf: #121c2e;
+    --surf-soft: rgba(238,243,250,.06);
+    --line: rgba(238,243,250,.12);
+    --accent: #6ea8f5;
+    --accent-soft: rgba(110,168,245,.14);
+    --on-accent: #0b1220;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Space Grotesk", ui-sans-serif, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+
+  .page {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: clamp(32px, 6vw, 68px) 24px clamp(64px, 10vw, 100px);
+  }
+
+  .eyebrow {
+    font-family: "DM Mono", ui-monospace, Menlo, monospace;
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-family: "Space Grotesk", ui-sans-serif, sans-serif;
+    font-weight: 700;
+    font-size: clamp(36px, 6vw, 50px);
+    line-height: .98;
+    letter-spacing: -.02em;
+    margin: 0 0 10px;
+    text-wrap: balance;
+  }
+
+  .lede {
+    font-size: 17px;
+    color: var(--sub);
+    max-width: 56ch;
+    margin: 0 0 36px;
+  }
+
+  .contact-card {
+    background: var(--surf);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 26px 28px;
+    margin: 0 0 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .contact-card .label {
+    font-family: "DM Mono", ui-monospace, Menlo, monospace;
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--sub);
+    margin-bottom: 8px;
+  }
+  .contact-card .email {
+    font-family: "DM Mono", ui-monospace, Menlo, monospace;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--accent);
+  }
+  .contact-card .reply-note {
+    font-size: 13px;
+    color: var(--sub);
+    max-width: 30ch;
+  }
+
+  section { margin: 0 0 40px; }
+  section:last-of-type { margin-bottom: 0; }
+
+  h2 {
+    font-family: "Space Grotesk", ui-sans-serif, sans-serif;
+    font-weight: 600;
+    font-size: 21px;
+    letter-spacing: -.01em;
+    margin: 0 0 12px;
+    border-top: 1px solid var(--line);
+    padding-top: 28px;
+  }
+  section:first-of-type h2 { border-top: none; padding-top: 0; }
+
+  p, li { max-width: 66ch; font-size: 15.5px; font-weight: 400; }
+  p { margin: 0 0 14px; }
+  ul { margin: 0 0 14px; padding-left: 22px; }
+  li { margin-bottom: 8px; }
+  strong { font-weight: 600; }
+
+  .qa { margin-bottom: 24px; }
+  .qa .q {
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .qa .a {
+    color: var(--sub);
+    font-size: 15px;
+    margin: 0;
+  }
+
+  .checklist {
+    background: var(--surf-soft);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin: 0 0 14px;
+  }
+  .checklist p { margin: 0 0 8px; font-size: 14px; color: var(--sub); }
+  .checklist ul { margin: 0; }
+  .checklist li { font-size: 14px; color: var(--sub); margin-bottom: 4px; }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--sub);
+  }
+  footer a { margin-right: 18px; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .page { animation: rise .5s ease both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <span class="eyebrow">Contrail · Support</span>
+  <h1>Support</h1>
+  <p class="lede">Contrail has no account to sign into, no server to go down, and nothing to sync — so most support questions come down to one of a few things below. If yours isn't one of them, just write in.</p>
+
+  <div class="contact-card">
+    <div>
+      <div class="label">Email</div>
+      <div class="email">support@ver93.com</div>
+    </div>
+    <div class="reply-note">Real questions get real answers, usually within a couple of days.</div>
+  </div>
+
+  <section>
+    <h2>Before you write in</h2>
+    <div class="checklist">
+      <p>A couple of things that make a reply faster:</p>
+      <ul>
+        <li>Which iPhone and iOS version you're on (Settings → General → About)</li>
+        <li>Contrail's version number (Stats tab, if it's shown; otherwise the App Store listing page)</li>
+        <li>What you expected to happen, and what happened instead</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Common questions</h2>
+
+    <div class="qa">
+      <div class="q">A trip looks wrong, or a place I don't recognize showed up.</div>
+      <p class="a">Open <strong>How Contrail works</strong> — tap the <strong>?</strong> in the top corner of the Stats tab. It covers trip splitting, home detection, and photos with someone else's location on them (a photo sent to you over Messages or WhatsApp carries a real location just like one you took yourself).</p>
+    </div>
+
+    <div class="qa">
+      <div class="q">I want to fix a trip Contrail got wrong.</div>
+      <p class="a">Open the trip and tap Edit — title, journal entry, dates, countries, cities, cover photo, and which photos belong to it are all editable directly in the app.</p>
+    </div>
+
+    <div class="qa">
+      <div class="q">Contrail crashed, or a screen is stuck.</div>
+      <p class="a">Force-quit and reopen it first — this clears almost everything. If it keeps happening, write in with the details above; a crash is a bug, not something you did wrong.</p>
+    </div>
+
+    <div class="qa">
+      <div class="q">Can I delete my data, or an account?</div>
+      <p class="a">At this time Contrail does not have the concept of an account. Deleting the app deletes everything it's ever computed.</p>
+    </div>
+
+    <div class="qa">
+      <div class="q">I have an idea for a feature, or found something confusing.</div>
+      <p class="a">Write in — this is a small, actively-developed app, and real feedback shapes it directly.</p>
+    </div>
+  </section>
+
+  <footer>
+    <a href="https://ver93.com/contrail/privacy">Privacy Policy</a>
+    <a href="https://ver93.com/contrail/terms">Terms of Service</a>
+  </footer>
+</div>
+
+</body>
+</html>
